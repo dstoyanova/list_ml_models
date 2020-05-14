@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Models</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="jumbotron text-center">
+  <h1>ML Models</h1>
+    <p>We're listing your models using the STACK<i>n</i> API.</p>
+</div>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">UID</th>
+            <th scope="col">Name</th>
+            <th scope="col">URL</th>
+            <th scope="col">Uploaded</th>
+            <th scope="col">Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for model in models %}
+        <tr>
+            <th scope="row">{{ model.id }}</th>
+            <td>{{ model.uid }}</td>
+            <td>{{ model.name }}:{{ model.tag }}</td>
+            <td><a href="{{ model.url }}">{{ model.url }}</a></td>
+            <td>{{ model.uploaded_at }}</td>
+            <td>
+                {% if model.status == 'CR' %}
+                Created
+                {% elif model.status == 'DP' %}
+                Deployed
+                {% else %}
+                Archived
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
